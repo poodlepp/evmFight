@@ -30,7 +30,7 @@
     + s 从p开始的字节数
     + t1 t2  可索引事件参数
 - gas
-  - 一般来说一个index 375gas
+  - 一般来说一个indexed 375gas
   - 没有index 就算375gas
   - 一个byte 8gas
 - 检查-事件-交互 模式
