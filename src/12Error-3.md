@@ -1,0 +1,50 @@
+[TOC]
+## 错误处理
+ - 处理方式
+    - revert
+    - assert
+    - require
+    - invalid
+ - Assert
+    - 测试内部错误
+    - 检查不变性
+    - 抛出Panic(uint256)
+    - 状态回滚
+    - gas回退
+       - 0.8.0之后的特性
+ - require
+    - 场景
+       - 提供给函数参数的输入。
+       - 从外部调用其他合约的返回值。
+       - 处理后必须具有特定值的合约状态。
+    - 有 error string
+       - error(string)
+    - 无 error string
+ - revert
+    - revert();
+    - revert(string memory reason);
+    - revert CustomError(arg1, arg2);
+    - 与require的返回是一样的
+    - 有对应 操作码
+       - revert(offset,length)
+----
+ - 外部调用的错误
+    - 大多数错误会抛出来
+    - 底层方法只会返回一个bool
+       - 举例
+          - send
+          - call
+          - delegatecall
+          - staticcall
+       - returndata
+          - selector
+          - data
+          - 调用者可以自行决定抛出还是不抛出
+ - 合约创建的错误
+ - 账户边缘情况
+ - 算术运算错误
+    - 普通
+    - 位运算截断
+ - ecrecover
+    - ECDSA
+       - 失败返回0
