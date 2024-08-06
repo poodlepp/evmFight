@@ -41,7 +41,7 @@ constant immutable 可能存放在任何位置
   - revert
   - 整体类似switch
 - 存储位置
-  - 账户状态 （保存codehash；nonce,balance,storageRoot洗牌时不需要处理全量字节码）
+  - 账户状态 （保存codehash；nonce,balance,storageRoot，codehash洗牌时不需要处理全量字节码）
   - 合约字节码 底层数据库，key相同还可以复用,节省空间
   - 合约存储
 - 代码分类

@@ -17,7 +17,7 @@
 
 布局
 - 存储不能再函数调用中创建
-- solc zzz.sol --storage-layout --pertty-json
+- solc zzz.sol --storage-layout --pretty-json
 - 连续的状态变量 如何可以压缩到一个slot，会自动压缩，但是不如手动压缩效率高
 - 继承合约，布局也会继承，也会压缩
 
