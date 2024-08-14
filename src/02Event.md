@@ -23,16 +23,19 @@
   - 合约部署更加便宜，触发时也更便宜
   - 假设合约中只有一个事件，那么定义为匿名，既可以省gas，也可以明确的知晓发生的event，也可以定义4th indexed
   - 匿名事件没有bytes32 主题hash，不支持.selector
-- LOG操作码 记录日志/事件   ？？？
+- LOG操作码    使用yul记录日志/事件，如果恰好可以复用字节码，还是比较省gas的
   - 可以控制topic的个数
+  - emit底层就是log2来实现的
   - logn(p,s,t1,t2...tn)
     + p 开始获取数据的内存位置
     + s 从p开始的字节数
-    + t1 t2  可索引事件参数
+    + t1 t2  可索引事件参数; 一个也没有 应该就是对应匿名事件
 - gas
-  - 一般来说一个indexed 375gas
+  - static_gas = 375
+  - dynamic_gas = 375 * topic_count + 8 * size + memory_expansion_cost
   - 没有index 就算375gas
   - 一个byte 8gas
+  - 内存扩展gas 单算
 - 检查-事件-交互 模式
   - remix静态分析工具
   - Slither 检测
