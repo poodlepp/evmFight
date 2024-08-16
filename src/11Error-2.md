@@ -1,23 +1,37 @@
 [TOC]
 ## 运行时错误
- - Error(string)
- - Panic(uint256)
- -  - 正常代码不可能输出panic，一定要修复
- -  - 使用工具来检查
- -  -  - slither
- -  -  - mythx
- - custom error
- -  - 减小合约字节码大小
- -  - 允许传递动态数据
- -  - @dev  @param  描述错误，参数
- -  - 是abi的一部分
- -  - 内联汇编中无法访问 custom error
- -  - solc  --hashes 可以列出custom error
- - invalid
- -  - 内联汇编中使用
- -  -  - assembly
- -  - 回退交易，消耗所有的gas
- - 未来的错误类型
- - selector
-    - 每个类别都是不同的，尤其是custom error
-    - 操作码 REVERT 之前，有一个 4 字节的值被推入堆栈，就是selector
+- Error(string)   0x08c379a0
+   - 触发场景
+     - require
+     - revert
+     - 1 2 3
+   - revert()  没有字符串，没有签名？
+     - 不需要memory数据结构（签名等），字节码直接返回
+- Panic(uint256)   0x4e487b71
+   - 触发场景
+     - assert  /  编译期创建
+     - index--  下溢
+   - panic(uint256)
+     - num 代表具体的错误码  0.8.0之后开始使用；使用REVERT 操作码实现
+     - 之前是INVALID，会耗尽gas
+   - 正常代码不可能输出panic，一定要修复
+   - 使用工具来检查
+      - slither
+      - mythx
+- custom error
+   - 减小合约字节码大小，降低部署成本
+   - 允许传递动态数据
+   - @dev  @param  描述错误，参数
+   - 是abi的一部分
+   - 内联汇编中无法访问 custom error
+   - solc  --hashes 可以列出custom error
+- invalid
+   - 只能内联汇编中触发
+     - assembly
+   - 回退交易，消耗所有的gas
+     - 判定gas已经不足，可以使用invalid结束
+- 未来的错误类型
+- selector
+   - 每个类别都是不同的，尤其是custom error
+   - 操作码 REVERT 之前，有一个 4 字节的值被推入堆栈，就是selector
+    

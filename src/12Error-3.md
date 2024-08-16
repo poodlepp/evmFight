@@ -13,13 +13,17 @@
     - gas回退
        - 0.8.0之后的特性
  - require
+    - custom error使用越来越多
     - 场景
        - 提供给函数参数的输入。
        - 从外部调用其他合约的返回值。
        - 处理后必须具有特定值的合约状态。
     - 有 error string
        - error(string)
+       - revert操作码 + 内存配合
+       - 4bytes选择器 + offset一个字 + length一个字 + data
     - 无 error string
+      - 不需要内存中存放数据，revert操作码直接搞定
  - revert
     - revert();
     - revert(string memory reason);
@@ -28,9 +32,12 @@
     - 有对应 操作码
        - revert(offset,length)
 ----
- - 外部调用的错误
+ - 外部调用的错误      /**  重点 **/
     - 大多数错误会抛出来
-    - 底层方法只会返回一个bool
+       - 耗尽gas
+       - 没有匹配函数
+       - 被调用函数抛出异常
+    - 底层方法会返回一个  bool， bytes memory
        - 举例
           - send
           - call
@@ -42,9 +49,12 @@
           - 调用者可以自行决定抛出还是不抛出
  - 合约创建的错误
  - 账户边缘情况
+   - 调用一个不存在的地址，也会返回true
+   - 读取代码时会返回地址上的默认值0  也就是STOP命令
  - 算术运算错误
-    - 普通
-    - 位运算截断
+    - 0.8.0之后 算术溢出 panic
+    - 如果是unchecked，会截断然后导致运算错误
+    - 位运算 不会溢出，总是截断处理
  - ecrecover
     - ECDSA
-       - 失败返回0
+       - 失败返回0，而不是error

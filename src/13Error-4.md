@@ -1,21 +1,24 @@
 [TOC]
 ## try-catch
+ - 0.6.2版本开始支持
  - 场景
- -  - 外部函数调用
- -  - 合约创建
- -  - 低级调用
+    - 外部函数调用
+    - 合约创建
+    - 低级调用
  - 注意
- -  - try-catch  returns不分是可选的；但是如果出现就需要保持一致
- - try内部
- -  - 可以做很多事情
+    - try-catch  returns部分是可选的；但是如果出现就需要保持一致
+    - 如果是合约创建，returns 创建好的合约
+ - try expression {}
+    - {}可以做很多事情
  - catch类型
- -  - catch Error(string memory reason){}
- -  - panic
- -  - bytes
- -  - 也可以不指定接受类型，直接就是{}
+    - catch Error(string memory reason){}
+    - panic
+    - bytes
+    - 也可以不指定接受类型，直接就是{}
  - 自身代码块内的error
- -  - 会导致回滚
+    - 会导致回滚,不会被catch
+    - try {} catch {}   没有expression是没有意义的
  - 被调用者
- -  - 因为发生了error 是肯定会回退的
+    - 因为发生了error 是肯定会回退的
  - 最多传递63/64
- -  - 防止无法处理错误
+    - 防止无法处理错误
