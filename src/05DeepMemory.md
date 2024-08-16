@@ -37,8 +37,10 @@
   + load length 
   + allocate space(memory)
   + write the string in memory 
-  + 此时内存是如何分布的？？？
-  + calldata 数据是否需要转移，存在原来的合约中？
+  + 此时内存是如何分布的
+    - cp过来 自己决定放哪里
+  + calldata 数据是否需要转移，存在原来的合约中
+    - calldata存放在单独的临时位置
 - 指针
   + memory 赋值给memory  实际是复制了指针
 - 内存扩展成本

@@ -28,9 +28,10 @@ constant immutable 可能存放在任何位置
 代码总是32bytes 倍数
 
 - 运行时字节码：
-  - 调度器dispatcher 找到智能合约
-  - 函数包装器  解包函数参数，包装返回值
-  - 函数主体  solidity函数的主逻辑
+  - 三个主要部分
+    - 调度器dispatcher 找到智能合约
+    - 函数包装器  解包函数参数，包装返回值
+    - 函数主体  solidity函数的主逻辑
   - 自由空闲指针
   - calldata 检查
   - 合约元数据
